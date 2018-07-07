@@ -26,7 +26,7 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-   assets:
+  assets:
     - assets/doom.jpg
     - assets/halo_4.jpg
     - assets/wolfenstein.jpg
@@ -42,17 +42,17 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-   fonts:
-     - family: petita
-       fonts:
-         - asset: assets/PetitaMedium.ttf
-         - asset: assets/PetitaBold.ttf
-           style: 700
-         - asset: assets/PetitaLight.ttf
-           style: 300
-     - family: gidole
-       fonts:
-         - asset: assets/Gidole-Regular.ttf
+  fonts:
+    - family: petita
+      fonts:
+        - asset: assets/PetitaMedium.ttf
+        - asset: assets/PetitaBold.ttf
+          weight: 700
+        - asset: assets/PetitaLight.ttf
+          weight: 300
+    - family: gidole
+      fonts:
+        - asset: assets/Gidole-Regular.ttf
 
   # For details regarding fonts from package dependencies,
   # see https://flutter.io/custom-fonts/#from-packages
