@@ -29,6 +29,8 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  double scrollPercent = 0.0;
+
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
@@ -45,14 +47,19 @@ class _MyHomePageState extends State<MyHomePage> {
           // Cards
           new Expanded(
             child: new CardFlipper(
-              cards: demoCards
+              cards: demoCards,
+              onScroll: (double scrollPercent) {
+                setState(() {
+                  this.scrollPercent = scrollPercent;
+                });
+              },
             )
           ),
 
           // Bottom Bar
           new BottomBar(
             cardCount: demoCards.length,
-            scrollPercent: 0.0,
+            scrollPercent: scrollPercent,
           ),
         ],
       ),
@@ -62,9 +69,11 @@ class _MyHomePageState extends State<MyHomePage> {
 
 class CardFlipper extends StatefulWidget {
   final List<CardViewModel> cards;
+  final Function(double scrollPercent) onScroll;
 
   CardFlipper({
     this.cards,
+    this.onScroll,
   });
 
   @override
@@ -89,6 +98,10 @@ class _CardFlipperState extends State<CardFlipper> with TickerProviderStateMixin
     ..addListener(() {
       setState(() {
         scrollPercent = lerpDouble(finishScrollStart, finishScrollEnd, finishScrollController.value);
+
+        if (widget.onScroll != null) {
+          widget.onScroll(scrollPercent);
+        }
       });
     });
   }
@@ -111,6 +124,10 @@ class _CardFlipperState extends State<CardFlipper> with TickerProviderStateMixin
 
     setState(() {
       scrollPercent = (startDragPercentScroll + (-singleCardDragPercent / widget.cards.length)).clamp(0.0, 1.0 - (1 / widget.cards.length));
+
+      if (widget.onScroll != null) {
+        widget.onScroll(scrollPercent);
+      }
     });
   }
 
